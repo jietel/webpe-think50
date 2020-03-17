@@ -1,6 +1,6 @@
 {
     "name": "webpe/think50",
-    "description": "Webpe.cn modified thinkphp framework",
+    "description": "Webpe.cn modified thinkphp5.0 framework",
     "type": "think-framework",
     "keywords": [
         "framework",
