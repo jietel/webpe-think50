@@ -289,9 +289,9 @@ final class Loader
             'traits'   => LIB_PATH . 'traits' . DS,
         ]);
         // 加载类库映射文件@jayter
-        //if (is_file(RUNTIME_PATH . 'classmap' . EXT)) {
-        //    self::addClassMap(__include_file(RUNTIME_PATH . 'classmap' . EXT));
-        //}
+        if (is_file(RUNTIME_PATH . 'classmap' . EXT)) {
+            self::addClassMap(__include_file(RUNTIME_PATH . 'classmap' . EXT));
+        }
 
         // 自动加载 extend 目录
         self::$fallbackDirsPsr4[] = rtrim(EXTEND_PATH, DS);

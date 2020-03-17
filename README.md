@@ -1,11 +1,11 @@
 框架优化记录：
-1. 统一使用入口文件xstart.php
+1. 统一使用入口文件start.php
 2. /think/Loader.php文件288行增加LOAD_COMPOSER
 
 
 
 ## 框架优化记录：
-+ 统一使用入口文件xwebcms\xstart.php优化配置
++ 统一使用入口文件thinkphp\start.php优化配置
 + 系统加载修改think\Loader.php优化代替,Composer按需加载
 + 应用管理修改think\App.php
 + 助手函数修改think\helper.php
@@ -13,6 +13,7 @@
 + 接口基类使用xwebcms\control\Restful代替，更完善的支持
 + 精简的模型类xwebcms\library\Model,按需加载
 + Env类删除,使用Loader::env
++ 开发结构调整webpe\functions.php和webpe\command.php默认加载
  
  
 ### helper.php
@@ -20,18 +21,18 @@
  
 ### think\Loader.php
 + autoload 优化
-+ registerError 增加的按需加载异常类，在xstart.php中使用
-+ register 去掉自动检测classmap配置,映射部分类到xwebcms\library下
++ registerError 增加的按需加载异常类，在start.php中使用
++ register 去掉自动检测classmap配置?,映射部分类到xwebcms\library下
 + register 去掉自动检测Composer，改为手动调用registerComposerLoader
 + registerComposerLoader 改为手动调用
 + Env::get移到Loader::env
 
 ### think\App.php
 + 去掉application\lang\语言使用
-+ init方法中去掉检测配置缓存init.php
++ init方法中去掉检测配置缓存init.php?
 + init方法中去掉模块扩展配置extra目录检测
 + init方法增加common防混淆，模块中命名为xxx/xxx.common.php
-+ initCommon方法中手动加载helper.php,不从extra_file_list中加入
++ initCommon方法中加载helper.php,不从extra_file_list中加入
 + 修改module方法里实现模块单独可设置 app_debug
 
 ### think\View.php

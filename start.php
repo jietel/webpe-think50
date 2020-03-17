@@ -12,15 +12,15 @@ define('THINK_START_TIME', microtime(true));
 define('THINK_START_MEM', memory_get_usage());
 define('EXT', '.php');
 define('DS', DIRECTORY_SEPARATOR);
-defined('APP_PATH') or define('APP_PATH', dirname($_SERVER['SCRIPT_FILENAME']) . DS);
-define('XWEB_PATH', __DIR__ . DS);
+defined('APP_PATH') or define('APP_PATH', '../app/');//dirname($_SERVER['SCRIPT_FILENAME']) . DS
 define('ROOT_PATH', dirname(realpath(APP_PATH)) . DS);
-define('THINK_PATH',ROOT_PATH .'thinkphp'.DS);
+define('XWEB_PATH', ROOT_PATH . 'webpe' . DS);
+define('VENDOR_PATH', ROOT_PATH . 'vendor' . DS);
+define('THINK_PATH',VENDOR_PATH .'thinkphp'.DS);
 define('LIB_PATH', THINK_PATH . 'library' . DS);
 define('CORE_PATH', LIB_PATH . 'think' . DS);
 define('TRAIT_PATH', LIB_PATH . 'traits' . DS);
 define('EXTEND_PATH', XWEB_PATH . 'extend' . DS);
-define('VENDOR_PATH', ROOT_PATH . 'vendor' . DS);
 define('RUNTIME_PATH', ROOT_PATH . 'runtime' . DS);
 define('LOG_PATH', RUNTIME_PATH . 'log' . DS);
 define('CACHE_PATH', RUNTIME_PATH . 'cache' . DS);
@@ -62,7 +62,7 @@ if (is_file(ROOT_PATH . '.env')) {
 \think\Loader::registerError();
 
 // 加载惯例配置文件
-\think\Config::set(include XWEB_PATH . 'convention' . EXT);
+\think\Config::set(include THINK_PATH . 'convention' . EXT);
 
 
 

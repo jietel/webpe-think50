@@ -234,17 +234,13 @@ final class App
      */
     private static function init($module = '')
     {
-    	// 避免common文件混淆 @jayter
-    	$common = $module ? $module.'.common' : 'common';
+        $common = $module ? $module.'.common' : 'common';
         // 定位模块目录
         $module = $module ? $module . DS : '';
-
         // 加载初始化文件
-        //if (is_file(APP_PATH . $module . 'init' . EXT)) {
-        //    include APP_PATH . $module . 'init' . EXT;
-        //} elseif (is_file(RUNTIME_PATH . $module . 'init' . EXT)) {
-        //    include RUNTIME_PATH . $module . 'init' . EXT;
-        //} else {
+        if (is_file(RUNTIME_PATH . $module. 'init' . EXT)) {
+            include RUNTIME_PATH . $module. 'init' . EXT;
+        } else {
             // 加载模块配置
             $config = Config::load(CONF_PATH . $module . 'config' . CONF_EXT);
 
@@ -252,17 +248,7 @@ final class App
             $filename = CONF_PATH . $module . 'database' . CONF_EXT;
             Config::load($filename, 'database');
 
-            // 读取扩展配置文件
-            /*if (is_dir(CONF_PATH . $module . 'extra')) {
-                $dir   = CONF_PATH . $module . 'extra';
-                $files = scandir($dir);
-                foreach ($files as $file) {
-                    if ('.' . pathinfo($file, PATHINFO_EXTENSION) === CONF_EXT) {
-                        $filename = $dir . DS . $file;
-                        Config::load($filename, pathinfo($file, PATHINFO_FILENAME));
-                    }
-                }
-            }*/
+            // 读取扩展配置文件 @去掉
 
             // 加载应用状态配置
             if ($config['app_status']) {
@@ -274,17 +260,19 @@ final class App
                 Hook::import(include CONF_PATH . $module . 'tags' . EXT);
             }
 
-            // 加载公共文件
-            $path = APP_PATH . $module;
-            if (is_file($path . $common . EXT)) {
-            	include $path . $common . EXT;
-            }
-
-            // 加载当前模块语言包
             if ($module) {
+                // 加载模块公共文件 @jayter
+                $path = APP_PATH . $module;
+                if (is_file($path . $common . EXT)) {
+                    include $path . $common . EXT;
+                }
+                // 加载当前模块语言包 @jayter
                 Lang::load($path . 'lang' . DS . Request::instance()->langset() . EXT);
+            }else{
+                // 加载公共文件 @jayter
+                include XWEB_PATH.'functions'.EXT;
             }
-        //}
+        }
 
         return Config::get();
     }

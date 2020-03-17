@@ -127,7 +127,15 @@ class Console
             $config = Config::get('console');
             // 实例化 console
             $console = new self($config['name'], $config['version'], $config['user']);
-
+            // 默认加载webpe扩展命令 @jayter
+            $commands = include XWEB_PATH . 'command' . EXT;
+            if (is_array($commands)) {
+                foreach ($commands as $command) {
+                    class_exists($command) &&
+                    is_subclass_of($command, "\\think\\console\\Command") &&
+                    $console->add(new $command());  // 注册指令
+                }
+            }
             // 读取指令集
             if (is_file(CONF_PATH . 'command' . EXT)) {
                 $commands = include CONF_PATH . 'command' . EXT;
