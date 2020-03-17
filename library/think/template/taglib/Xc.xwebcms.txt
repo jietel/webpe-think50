@@ -1,0 +1,145 @@
+标签：<xweb:nav></xweb:nav>
+作用：导航菜单
+用法示例：<xweb:nav field="" result="" cache="" mod=""> .. HTML ..</xweb:nav>
+参数说明：
+	@cache		数据缓存时间，单位秒
+	@result		返回值变量名称，默认nav
+	@mod		取模，默认2
+	@field		需获取的字段，默认true
+	#posid		需要增加位置
+注意：使用时无需遍历result，但是tree=1时调用子集需要遍历$nav[_]
+		
+标签：<xweb:query/>
+作用：SQL查询标签
+用法示例：<xweb:query sql="" result="" cache="" limit=""/>
+参数说明：
+	@sql		SQL语句，支持select,update,insert 但强烈建议只用于select，@_代表数据表前缀，避免安全威胁，同时不建议直接在SQL语句中使用外部变量，如:$_GET,$_POST等。
+	@limit		返回数据量(=1时只返回一维数组)
+	@cache		数据缓存时间，单位秒(只有select支持缓存)
+	@result		返回值变量名称，默认query
+注意：如果select多条数据时需要遍历result,
+	
+标签：<xweb:cat></xweb:cat>
+作用：栏目分类标签
+用法示例：<xweb:cat id="" pid="" result="" mod="" key="" field="" cache=""> .. HTML ..</xweb:cat>
+参数说明：
+	@id|ic		指定调用ID(使用时只返回一维数组) 可以为变量
+	@pid		调用某个栏目的子栏目 可以为变量
+	@mod		取模，默认2
+	@field		需获取的字段，默认true(单条数据有效)
+	@cache		数据缓存时间，单位秒(单条数据有效)
+	@result		返回值变量名称，默认cat
+	@key		当前的循环次数变量默认为i
+注意：
+	
+标签：<xweb:value/>
+作用：获取字段值,包含统计
+用法示例：<xweb:value model="" table="" where="" type="" field="" filter="" result=""/>
+		  <xweb:max|min|avg|sum|count></xweb:*>
+参数说明：
+	@model		数据表模型,根thinkphp的M()一样第一个字母大写的驼峰方式
+	@table		数据表,用于跨数据库操作
+	@where		查询条件，与thinkphp的条件表达式一样
+	@type		查询方式max|min|avg|sum|count(该别名可以独立标记使用)
+	@field		字段(1个字段直接输出，多个字段返回数组到result)
+	@filter		可以用来调用函数处理数据
+	@result		返回值变量名称，默认cate
+注意：
+
+标签：<xweb:local/>
+作用：面包屑导航
+用法示例：<xweb:local catid="catid" space=""/>
+参数说明：
+	@catid		栏目ID 可以指定ID 也可以调用catid变量
+	@space		间隔符li表示<li>...</li>,可以为其他字符比如&gt;分隔符
+注意：
+
+标签：<xweb:lists></xweb:lists>
+作用：通用数据调用标签 
+用法示例：<xweb:lists model field limit order where table join group result key mod more unset> .. HTML ..</xweb:lists>
+参数说明：
+	@model		数据表模型,与thinkphp的M()一样第一个字母大写的驼峰方式
+	@field		需获取的字段，默认true
+	@limit		返回数据量
+	@order		排序字段及方式比如"id desc"
+	@where		查询条件，与thinkphp的条件表达式一样
+	@table		数据表,用于跨数据库操作
+	@join		关联查询,@_表示数据库前缀,@d_表示基本文档表@_document_,比如xweb_document_article可以简写为@d_article
+	@group		分组查询
+	@cache		数据缓存时间，单位秒
+	@result		返回值变量名称，默认lists
+	@key		当前的循环次数默认为i
+	@mod		取模，默认2
+	@page		分頁数(结合<xweb:listsPage/>使用)
+	@unset		是否摧毁标记在数据集
+注意：
+
+标签：<xweb:listsPage/>
+作用：通用数据分页
+用法示例：<xweb:listsPage bind="" param="a=1&b=2&catid=$catid" reurl="1"/>
+参数说明：
+	@bind		绑定<xweb:lists>标记的result属性
+	@param		分页附加的URL参数
+	@reurl      为1时不记住$_GET参数重置URL
+注意：
+
+
+标签：<xweb:data></xweb:data>
+作用：栏目数据调用标签 
+用法示例：<xweb:data table where field join group order cache limit result key mod> .. HTML ..</xweb:data>
+参数说明：
+	@table		数据表
+	@where		查询条件 catid=$catid
+	@field		需获取的字段，默认*
+	@join		关联查询,@_表示数据库前缀
+	@group		分组查询
+	@order		排序字段及方式比如"id desc"
+	@cache		数据缓存时间，单位秒
+	@limit		返回数据量，默认20
+	@mod		取模，默认2
+	@result		返回值变量名称，默认vo
+	@key		当前的循环次数变量默认为i
+注意：
+
+	
+标签：<xweb:type></xweb:type>
+作用：导航菜单
+用法示例：<xweb:type model pid result cache mod key limit> .. HTML ..</xweb:type>
+参数说明：
+	@model		数据表模型
+	@pid		某id的子类
+	@cache		数据缓存时间，单位秒
+	@result		返回值变量名称，默认vo
+	@mod		取模，默认2
+	@limit		返回数据量,默认不限
+	@key		当前的循环次数变量默认为i
+注意：使用时无需遍历result
+
+
+标签：<xweb:links></xweb:links>
+作用：导航菜单
+用法示例：<xweb:links type result cache mod key> .. HTML ..</xweb:links>
+参数说明：
+	@type		链接类型可logo或text，空为所有
+	@cache		数据缓存时间，单位秒
+	@result		返回值变量名称，默认vo
+	@mod		取模，默认2
+	@limit		返回数据量,默认不限
+	@key		当前的循环次数变量默认为i
+注意：使用时无需遍历result
+	
+	
+标签：<xweb:poster></xweb:poster>
+作用：导航菜单
+用法示例：<xweb:poster typeid field result cache mod key random> .. HTML ..</xweb:poster>
+参数说明：
+	@typeid		广告位id
+	@field		需获取的字段，默认id,title,url,image,bgcolor
+	@cache		数据缓存时间，单位秒
+	@result		返回值变量名称，默认vo
+	@mod		取模，默认2
+	@limit		返回数据量,默认不限
+	@key		当前的循环次数变量默认为i
+	@random		1随机
+注意：使用时无需遍历result	
+	

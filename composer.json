@@ -1,0 +1,26 @@
+{
+    "name": "webpe/think50",
+    "description": "Webpe.cn modified thinkphp framework",
+    "type": "think-framework",
+    "keywords": [
+        "framework",
+        "thinkphp",
+        "webpe"
+    ],
+    "homepage": "http://www.webpe.cn/",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "liu21st",
+            "email": "liu21st@gmail.com"
+        },
+        {
+            "name": "jayter",
+            "email": "jayter2@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "webpe/installer": "dev-master"
+    }
+}
