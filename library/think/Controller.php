@@ -14,7 +14,7 @@ namespace think;
 use think\exception\ValidateException;
 use traits\controller\Jump;
 
-Loader::import('controller/Jump', TRAIT_PATH, EXT);
+Loader::import('controller/Jump', LIB_PATH . 'traits' . DS, EXT);
 /**
  * 已弃用(请使用xweb\control\Controller)@jayer
  */

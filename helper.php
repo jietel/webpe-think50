@@ -58,7 +58,7 @@ function db($name = '', $config = [], $force = false) {
  * @return boolean
  */
 function load_trait($class, $ext = EXT) {
-	return Loader::import($class,TRAIT_PATH,$ext);
+	return Loader::import($class,LIB_PATH . 'traits' . DS,$ext);
 }
 
 /**
